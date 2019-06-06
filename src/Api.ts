@@ -1,12 +1,12 @@
 export default class Api {
 
-    Ip: string | undefined;
-    Url: string | undefined;
-    StatusCode: number | undefined;
-    Request: object | undefined;
-    Method: string | undefined;
-    Headers: object | undefined;
-    Response: object | undefined;
-    Timestamp: string | undefined;
+    public Ip: string | undefined;
+    public Url: string | undefined;
+    public StatusCode: number | undefined;
+    public Request: object | undefined;
+    public Method: string | undefined;
+    public Headers: object | undefined;
+    public Response: object | undefined;
+    public Timestamp: string | undefined;
 
 }

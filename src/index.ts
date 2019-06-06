@@ -9,7 +9,7 @@ export default class Logging implements ILogger {
     private static CONN: Connection;
     private static CHAN: Channel;
 
-    init(rmqConfig: any): Promise<any> {
+    public init(rmqConfig: any): Promise<any> {
         return new Promise<any>((res, rej) => {
             amqp.connect(rmqConfig.url).then((connectedCon: Connection) => {
                 Logging.CONN = connectedCon;
@@ -21,6 +21,23 @@ export default class Logging implements ILogger {
         });
     }
 
+
+
+    public info(message: string, data: any): boolean {
+        throw new Error("Method not implemented.");
+    }
+    public warning(message: string, data: any): boolean {
+        throw new Error("Method not implemented.");
+    }
+    public critical(message: string, data: any): boolean {
+        throw new Error("Method not implemented.");
+    }
+    public api(data: Api): boolean {
+
+        this.publish("ayopop.api", data);
+        throw new Error("Method not implemented.");
+    }
+
     private publish(topic: string, message: any): any {
         const buff = Buffer.from(JSON.stringify(message));
         const tempsplit = topic.split('.');
@@ -30,21 +47,5 @@ export default class Logging implements ILogger {
         console.log('[x] Event Published : ' + topic);
         return ok;
     }
-
-    info(message: string, data: any): boolean {
-        throw new Error("Method not implemented.");
-    }
-    warning(message: string, data: any): boolean {
-        throw new Error("Method not implemented.");
-    }
-    critical(message: string, data: any): boolean {
-        throw new Error("Method not implemented.");
-    }
-    api(data: Api): boolean {
-
-        this.publish("ayopop.api",data);
-        throw new Error("Method not implemented.");
-    }
-
 
 }
