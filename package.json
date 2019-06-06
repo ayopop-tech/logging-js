@@ -23,5 +23,11 @@
     "license": "ISC",
     "files": [
         "lib/**/*"
-    ]
+    ],
+    "dependencies": {
+        "amqplib": "^0.5.3"
+    },
+    "devDependencies": {
+        "@types/amqplib": "^0.5.12"
+    }
 }
