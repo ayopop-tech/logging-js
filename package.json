@@ -1,5 +1,5 @@
 {
-    "name": "RMQLogger",
+    "name": "rmqlogger",
     "version": "1.0.2",
     "description": "A library for logging to rabbitmq ",
     "main": "lib/index.js",
