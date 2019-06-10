@@ -3,16 +3,16 @@ import Api from './Api';
 import * as amqp from 'amqplib';
 import { Connection, Channel, Replies } from 'amqplib';
 
-export default class Logging implements ILogger {
+export default class RMQLogger implements ILogger {
   private static CONN: Connection;
   private static CHAN: Channel;
 
   public init(rmqConfig: any): Promise<any> {
     return new Promise<any>((res, rej) => {
       amqp.connect(rmqConfig.url).then((connectedCon: Connection) => {
-        Logging.CONN = connectedCon;
-        Logging.CONN.createChannel().then((ch: Channel) => {
-          Logging.CHAN = ch;
+        RMQLogger.CONN = connectedCon;
+        RMQLogger.CONN.createChannel().then((ch: Channel) => {
+          RMQLogger.CHAN = ch;
           res();
         });
       });
@@ -38,7 +38,7 @@ export default class Logging implements ILogger {
     const tempsplit = topic.split('.');
     const routingKey = tempsplit[1];
     const exchange = tempsplit[0];
-    const ok = Logging.CHAN.publish(exchange, routingKey, buff);
+    const ok = RMQLogger.CHAN.publish(exchange, routingKey, buff);
     console.log('[x] Event Published : ' + topic);
     return ok;
   }
