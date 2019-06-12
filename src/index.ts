@@ -31,7 +31,7 @@ export default class RMQLogger implements ILogger {
     throw new Error('Method not implemented.');
   }
   public api(data: Api): boolean {
-    data["Source"] = RMQLogger.APP;
+    data.Source = RMQLogger.APP;
     this.publish('ayopop.api', data);
     throw new Error('Method not implemented.');
   }
