@@ -7,5 +7,5 @@ export default class Api {
   public Headers: object | undefined;
   public Response: object | undefined;
   public Timestamp: string | undefined;
-  public Source : string | undefined;
+  public Source: string | undefined;
 }
