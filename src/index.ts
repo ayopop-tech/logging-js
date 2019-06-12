@@ -6,10 +6,12 @@ import { Connection, Channel, Replies } from 'amqplib';
 export default class RMQLogger implements ILogger {
   private static CONN: Connection;
   private static CHAN: Channel;
+  private static APP: string;
 
-  public init(rmqConfig: any): Promise<any> {
+  public init(config: any): Promise<any> {
     return new Promise<any>((res, rej) => {
-      amqp.connect(rmqConfig.url).then((connectedCon: Connection) => {
+      RMQLogger.APP = config.app;
+      amqp.connect(config.url).then((connectedCon: Connection) => {
         RMQLogger.CONN = connectedCon;
         RMQLogger.CONN.createChannel().then((ch: Channel) => {
           RMQLogger.CHAN = ch;
@@ -29,6 +31,7 @@ export default class RMQLogger implements ILogger {
     throw new Error('Method not implemented.');
   }
   public api(data: Api): boolean {
+    data["Source"] = RMQLogger.APP;
     this.publish('ayopop.api', data);
     throw new Error('Method not implemented.');
   }
