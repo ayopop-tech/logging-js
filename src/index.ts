@@ -27,13 +27,13 @@ export default class RMQLogger implements ILogger {
   }
 
   public info(message: string, data: any): boolean {
-    return this.logme("info", data)
+    return this.logme('info', data);
   }
   public warning(message: string, data: any): boolean {
-    return this.logme("warning", data)
+    return this.logme('warning', data);
   }
   public critical(message: string, data: any): boolean {
-    return this.logme("critical", data)
+    return this.logme('critical', data);
   }
   public api(data: Api): boolean {
     data.Source = RMQLogger.APP;
@@ -41,7 +41,6 @@ export default class RMQLogger implements ILogger {
   }
 
   public logme(level: string, data: any) {
-
     data.Timestamp = new Date().toISOString();
 
     if (RMQLogger.CONSOLE === true) {
@@ -50,7 +49,6 @@ export default class RMQLogger implements ILogger {
     } else {
       return this.publish(RMQLogger.RMQEXCHANGENAME + '.' + level, data);
     }
-
   }
 
   private publish(topic: string, message: any): any {
@@ -62,7 +60,4 @@ export default class RMQLogger implements ILogger {
     console.log('[x] Event Published : ' + topic);
     return ok;
   }
-
-
 }
-
