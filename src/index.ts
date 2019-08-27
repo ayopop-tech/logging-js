@@ -42,7 +42,7 @@ export default class RMQLogger implements ILogger {
 
   public logme(level: string, data: any) {
 
-    data["Timestamp"] = new Date().toISOString();
+    data.Timestamp = new Date().toISOString();
 
     if (RMQLogger.CONSOLE === true) {
       console.log(data);
